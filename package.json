@@ -1,0 +1,35 @@
+{
+  "name": "@dmantsevich/colorful-semantic-logger",
+  "version": "1.0.0",
+  "description": "Colorful semantic logger",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmantsevich/colorful-logger.git"
+  },
+  "keywords": [
+    "colorful-logger",
+    "semantic-logger",
+    "log",
+    "logger",
+    "colors",
+    "semantic",
+    "colorful",
+    "console.log",
+    "console"
+  ],
+  "author": "https://github.com/dmantsevich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmantsevich/colorful-logger/issues"
+  },
+  "homepage": "https://github.com/dmantsevich/colorful-logger#readme",
+  "dependencies": {
+    "@barusu/chalk-logger": "0.0.45",
+    "chalk": "^4.1.0",
+    "lodash.merge": "^4.6.2"
+  }
+}
