@@ -1,9 +1,9 @@
-# Colorful Semantic Logger for Node.js
+# Colorful 🌈 Semantic 📖 Logger 🔢 for Node.js
 
 ## Overview
 Fast and simple log service, which can highlight important words, types & tags. 👨🏻‍💻
 
-[![](static/console.png)](https://www.npmjs.com/package/@dmantseivch/colorful-semantic-logger)
+[![](static/console.png)](https://www.npmjs.com/package/@dmantsevich/colorful-semantic-logger)
 
 ## Features
 - [x] Colorful 🌈
@@ -20,9 +20,9 @@ Fast and simple log service, which can highlight important words, types & tags. 
 ## How to use
 ### Install
 1) Install **[NodeJs](https://nodejs.org/en/)** (This will also install **npm**)
-2) Install [@dmantseivch/colorful-semantic-logger](https://www.npmjs.com/package/@dmantseivch/colorful-semantic-logger) as dependency for your project (👍):
+2) Install [@dmantsevich/colorful-semantic-logger](https://www.npmjs.com/package/@dmantsevich/colorful-semantic-logger) as dependency for your project (👍):
 ```shell script
-npm i @dmantseivch/colorful-semantic-logger --save
+npm i @dmantsevich/colorful-semantic-logger --save
 ```
 
 ### Usages
@@ -164,7 +164,7 @@ logger.log(`Some problems with your code.`); // problems will be highlighted
 ## ShortCodes
 ShortCodes uses for head formating (example: ``<time.now/> <level/>(<random/>): ``).
 
-Default ShortCodes: **time.now, date.now, loggerName, level**
+Default ShortCodes: **<time.now/>, <date.now/>, \<loggerName/>, \<level/>**
 
 Example:
 ```js
@@ -175,8 +175,8 @@ Example:
 ```
 
 ## Links
-- NPM: [@dmantseivch/colorful-semantic-logger](https://www.npmjs.com/package/@dmantseivch/colorful-semantic-logger) 
-- Github: [dmantseivch/colorful-semantic-logger](https://github.com/dmantseivch/colorful-semantic-logger)
+- NPM: [@dmantsevich/colorful-semantic-logger](https://www.npmjs.com/package/@dmantsevich/colorful-semantic-logger) 
+- Github: [dmantsevich/colorful-semantic-logger](https://github.com/dmantsevich/colorful-semantic-logger)
 
 🧰 
 
