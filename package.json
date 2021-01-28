@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dmantsevich/colorful-logger.git"
+    "url": "git+https://github.com/dmantsevich/colorful-semantic-logger.git"
   },
   "keywords": [
     "colorful-logger",
@@ -24,9 +24,9 @@
   "author": "https://github.com/dmantsevich",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/dmantsevich/colorful-logger/issues"
+    "url": "https://github.com/dmantsevich/colorful-semantic-logger/issues"
   },
-  "homepage": "https://github.com/dmantsevich/colorful-logger#readme",
+  "homepage": "https://github.com/dmantsevich/colorful-semantic-logger#readme",
   "dependencies": {
     "@barusu/chalk-logger": "0.0.45",
     "chalk": "^4.1.0",
