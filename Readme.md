@@ -39,12 +39,13 @@ logger.warn(`My warn message`);
 logger.error(`My error message`);
 logger.fatal(`My fatal message`);
 ```
+![Simple](./static/example-simple.png)
 
 ### With name
 ```js
 const { Logger } = require('@dmantsevich/colorful-semantic-logger');
 
-const logger = new Logger('LoggerForMyPackage');
+const logger = new Logger('Logger For My Package');
 
 logger.log(`My log message`);
 logger.debug(`My debug message`);
@@ -54,12 +55,13 @@ logger.warn(`My warn message`);
 logger.error(`My error message`);
 logger.fatal(`My fatal message`);
 ```
+![With Name](./static/example-with-name.png)
 
 ### With options
 ```js
-const { Logger, LEVELS.DEBUG } = require('@dmantsevich/colorful-semantic-logger');
+const { Logger, LEVELS } = require('@dmantsevich/colorful-semantic-logger');
 
-const logger = new Logger('MyPackage', { level: LEVELS.DEBUG });
+const logger = new Logger('MyPackage', { level: LEVELS.WARN }); // filter by only WARN+ criteria
 
 logger.log(`My log message`);
 logger.debug(`My debug message`);
@@ -70,9 +72,11 @@ logger.error(`My error message`);
 logger.fatal(`My fatal message`);
 ```
 
+![Only Warns](./static/example-ony-warn.png)
+
 ### Sub logger
 ```js
-const { Logger, LEVELS, DEBUG, FATAL } = require('@dmantsevich/colorful-semantic-logger');
+const { Logger, LEVELS } = require('@dmantsevich/colorful-semantic-logger');
 
 const packageLogger = new Logger('MyPackage', { level: LEVELS.DEBUG });
 const logger = packageLogger.createNew('MyComponent', { level: LEVELS.FATAL }); // name will be: MyComponent.MyPackage
@@ -85,23 +89,49 @@ logger.warn(`My warn message`);
 logger.error(`My error message`);
 logger.fatal(`My fatal message`);
 ```
+![Sub Logger](./static/example-sublogger.png)
 
 ### Tags
-Tag is a text beetwen ``<tagName>..that text will be processed..</tagName>``. It helps to format & paint your message. Tags & their formats are configurable. **[See configuration](#configuration)**. 
+Tag is a text between ``<tagName>..that text will be processed..</tagName>``. It helps to format & paint your message. Tags & their formats are configurable. **[See configuration](#configuration)**. 
 
 ### Reserved words
 Colorful Semantic Logger can highlights important words in your logs. **[See configuration](#configuration)**.
 
 ## API
 ### Package
+Default module exports next objects:
 - **ColorfulSemanticLogger(name, options)**: Main logger class. {_name_} - name/group for your custom logger. {_options_} - see **[configuration](#configuration)**.
 - **Logger**: the same as ColorfulSemanticLogger. Just shortname.
 - **logger**: default instance of ColorfulSemanticLogger class with default options.
 - **LEVELS**: Log levels. Levels: DEBUG, LOG, INFO, WARN, FATAL, ERROR, VERBOSE
 - unpacked **LEVELS** object
 
+## Logger instance
+For creating new logger, you need to create new instance:
+```js
+const { Logger } = require('@dmantsevich/colorful-semantic-logger');
+const logger = new Logger('My New Logger', {});
+logger.log('I want to say: <underline>Hello World!</underline>');
+```
+![Example: Hello World](./static/example-hello-world.png)
+
+### Methods
+- **logger.debug(msg, ...)**: Print ``debug`` message 
+- **logger.verbose(msg, ...)**: Print ``verbose`` message  
+- **logger.info(msg, ...)**: Print ``info`` message 
+- **logger.log(msg, ...)**: Print ``log`` message. The same as ``info``, but white.
+- **logger.warn(msg, ...)**: Print ``warn`` message.
+- **logger.error(msg, ...)**: Print ``error`` message.
+- **logger.throwError(msg, ...)**: Print ``error`` message and then throw new Error.
+- **logger.fatal(msg, ...)**: Print ``fatal`` message.
+- **logger.throwFatal(msg, ...)**: Print ``fatal`` message and then throw new Error.
+- **logger.print(infoMsg, verboseMsg)**: Easy way to print different messages for ``INFO`` & ``VERBOSE`` levels.
+- **logger.createNew(name[, options])**: create new sublogger. Sublogger uses namespace(split by dot) and same configuration.
+- **logger.removeTags(msg, ...)**: remove tags(only tags, not content) from message.
+- **Logger.LEVELS** (static property in the class): Contains levels: LOG, INFO, DEBUG, VERBOSE, FATAL, ERROR, WARN  
+
 ## Configuration
-Options for ``ColorfulSemanticLogger(name, options)`` class.
+Options for ``ColorfulSemanticLogger(name, options) or Logger(name, options)`` class.
 
 | Param     | Type      | Default Value     | Description |
 |--------   |:------:   |:---------------:  |-------------|
@@ -115,15 +145,34 @@ Options for ``ColorfulSemanticLogger(name, options)`` class.
 
 
 ## Semantic Data - Tags
-Predefined tags: **red**, **yellow**, **green**, **blue**, **number**, **key**, **value**, **!** (important!), **path**.
+Predefined tags: **number**, **key**, **value**, **!** (important!), **path**.
+
+Also possible to use [chalk](https://www.npmjs.com/package/chalk) API as tags. Example:
+```js
+const { Logger } = require('@dmantsevich/colorful-semantic-logger');
+const logger = new Logger('My Test Logger');
+
+logger.log('It will be <red>Red</red>!');
+logger.log('It will be <bgCyan>Background Cyan</bgCyan>!');
+logger.log('It will be <bold>Bold</bold>!');
+logger.log('It will be <#FF8C00>Orange</#FF8C00>!');
+logger.log('It will be <bg#FF8C00>Background Orange</bg#FF8C00>!');
+logger.log('It will be <green.underline.italic>Green + Underline + Italic</green.underline.italic>!');
+
+``` 
+![Exmplae Chalk](./static/example-chalk.png)
+
 
 ### How to use:
 ```js
-logger.log(`PI is <number>3.14</number>`); // 3.14 will be highlighted 
-logger.log(`Please, <red>STOP</red> doing it!`); // STOP will be red 
-logger.log(`Values: <value>null</value>, <value>3.14</value>, <value>true</value>, <value>hello</value>.`); // null, 3.14, true, hello will be  highlighted
+const { Logger } = require('@dmantsevich/colorful-semantic-logger');
+const logger = new Logger('My Test Logger');
+
+logger.log(`PI is <number>3.14</number>`); // 3.14 will be highlighted
+logger.log(`Key: <key>myKey</key>. Values: <value>null</value>, <value>3.14</value>, <value>true</value>, <value>hello</value>.`); // null, 3.14, true, hello will be  highlighted
 logger.log(`Path to module: <path>${__dirname}</path>.`); // __dirname value will be highlighted and parsed as path(relative for cwd).
 ``` 
+![Exmplae Chalk](./static/example-tags.png)
 
 ### How to define new
 ```js
@@ -149,6 +198,7 @@ logger.log(`Promise was resolved & connected to DB`); // resolved & connected wi
 logger.log(`Connection is fail!`); // fail will be highlighted 
 logger.log(`Some problems with your code.`); // problems will be highlighted 
 ``` 
+![Example: Reserved Words](./static/example-reserved-words.png)
 
 ### How to define new
 ```js
@@ -175,8 +225,11 @@ Example:
 ```
 
 ## Links
-- NPM: [@dmantsevich/colorful-semantic-logger](https://www.npmjs.com/package/@dmantsevich/colorful-semantic-logger) 
-- Github: [dmantsevich/colorful-semantic-logger](https://github.com/dmantsevich/colorful-semantic-logger)
+
+[![@dmantsevich/colorful-semantic-logger](static/npm-logo.png)](https://www.npmjs.com/package/@dmantsevich/colorful-semantic-logger)
+
+[![dmantsevich/colorful-semantic-logger](static/github-logo.png)](https://github.com/dmantsevich/colorful-semantic-logger)
+
 
 🧰 
 
